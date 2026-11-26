@@ -2,8 +2,6 @@
 
 A local Python command-line tool that flags common release risks before source code is shared publicly. It reports filenames, relative paths, line numbers, and finding categories only. It never prints matched secrets, contact details, notebook outputs, or file contents.
 
-This is an AI-assisted portfolio project prepared for Ghaya. It does not send files to a server, train a model, or claim that an automatic scan proves a repository is safe to publish.
-
 ## Checks
 
 - Hard-coded credential patterns in bounded text files.
@@ -16,7 +14,6 @@ This is an AI-assisted portfolio project prepared for Ghaya. It does not send fi
 - Presence of a recognized license file.
 - The supplied root is resolved before scanning. Symlinks inside that resolved tree are never followed; sensitive-file and sensitive-directory symlinks are blockers, while other symlinks and oversized text files are flagged for review.
 
-The scanner prunes common generated, VCS metadata, and data/model directories before traversing them. A `.git` entry inside the project is reported as a blocker because Git history is not inspected; a scan root inside `.git` metadata is rejected. Sensitive local state directories such as `.agent` and `.local`, opaque OpenPGP containers, and symlinks named as sensitive files or directories are also reported as blockers. The JSON report contains counts and safe relative file references; it does not contain matched text.
 
 ## Run
 
@@ -37,14 +34,4 @@ python -m portfolio_guard PATH_TO_PROJECT --json-output audit-report.json
 
 Exit code 1 means a blocker category was found. Exit code 0 means no blocker category was detected. Warnings still require human review.
 
-## Limits
 
-This is a preflight aid, not a legal review, malware scanner, secret-management system, license verifier, or proof of authorship. Patterns can miss secrets and can flag harmless examples. Review all findings and the source, data, models, and third-party licenses before publication.
-
-## Portfolio attribution
-
-Prepared for Ghaya with AI assistance. No model was trained as part of this project.
-
-## License
-
-No open-source license is included with this portfolio sample.
